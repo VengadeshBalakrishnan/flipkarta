@@ -33,7 +33,7 @@ body {
 }
 header {
   grid-area: header;
-  background-color: #203040;
+  background-color: #2874f0;
 }
 main {
   grid-area: main;
@@ -41,7 +41,7 @@ main {
 }
 footer {
   grid-area: footer;
-  background-color: #203040;
+  background-color: #2874f0;
   color: #ffffff;
 }
 /* Common */
@@ -108,4 +108,8 @@ img.medium {
 .rating span {
   color: #f0c040;
   margin: 0.1rem;
+}
+
+.rating.span:last-child{
+color: #404040;
 }
