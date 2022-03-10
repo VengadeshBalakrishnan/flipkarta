@@ -1,64 +1,85 @@
-import React from "react";
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
+import { detailsProduct } from "../actions/productActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 import Rating from "../components/Rating";
-import data from "../data";
-
 
 export default function ProductScreen(props) {
-    const { id } = useParams();
-    const product = data.product.find((p) => p._id === (id));
-  //const product = data.product.find((x) => x._id === '1');
 
-  if (!product) {
-    return <div>Product Not Found !!! </div>;
-  }
-  return (
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { id  } = params;
+  const productDetail = useSelector((state) => state.productDetails);  
+  const { loading, error, selectedProducts } = productDetail;  
+  
+  useEffect(() => {
+    dispatch(detailsProduct(id));
+  }, [dispatch, id]);
+
+  return (   
     <div>
-        <Link to="/" >Back to Result</Link>
-      <div className="row top">
-        <div className="col-2">
-          <img className="large" src={product.image} alt={product.name}></img>
-        </div>
-        <div className="col-1">
-          <ul>
-            <li>
-              <h1> {product.name}</h1>
-            </li>
-            <li>
-              <Rating
-                rating={product.rating}
-                numReview={product.numReview}
-              ></Rating>
-            </li>
-            <li>Price: $ {product.price}</li>
-            <li>Description: {product.description}</li>
-          </ul>
-        </div>
-        <div className="col-1">
-          <div className="card card-body">
-            <ul>
-              <li>
-                <div className="row">
-                  <div> Price </div>
-                  <div className="price"> $ {product.price}</div>
+      {loading ? (
+        <LoadingBox></LoadingBox>
+      ) : error ? (
+        <MessageBox variant="danger">{error}</MessageBox>
+      ) : (
+        <div className="row center">
+          <div>
+            <Link to="/">Back to Result</Link>
+            <div className="row top">
+              <div className="col-1">
+                <img
+                  className="large"
+                  src={selectedProducts.image}
+                  alt={selectedProducts.name}
+                ></img>
+              </div>
+              <div className="col-1">
+                <ul>
+                  <li>
+                    <h1> {selectedProducts.name}</h1>
+                  </li>
+                  <li>
+                    <Rating
+                      rating={selectedProducts.rating}
+                      numReview={selectedProducts.numReview}
+                    ></Rating>
+                  </li>
+                  <li>Price: $ {selectedProducts.price}</li>
+                  <li>Description: {selectedProducts.description}</li>
+                </ul>
+              </div>
+              <div className="col-1">
+                <div className="card card-body">
+                  <ul>
+                    <li>
+                      <div className="row">
+                        <div> Price </div>
+                        <div className="price"> $ {selectedProducts.price}</div>
+                      </div>
+                      <div className="row">
+                        <div> Status </div>
+                        <div>
+                          {selectedProducts.countInStock > 0 ? (
+                            <span className="success"> In Stock</span>
+                          ) : (
+                            <span className="danger">Unavailable</span>
+                          )}
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <button className="primary block">Add to Cart</button>
+                    </li>
+                  </ul>
                 </div>
-                <div className="row">
-                  <div> Status </div>
-                  <div>
-                      {product.countInStock>0 ? <span className="success"> In Stock</span> :
-                      <span className="danger">Unavailable</span>}
-                  </div>
-                </div>
-              </li>
-              <li>
-                  <button className="primary block">
-                      Add to Cart
-                      </button>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
