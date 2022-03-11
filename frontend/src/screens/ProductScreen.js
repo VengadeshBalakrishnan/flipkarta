@@ -24,7 +24,7 @@ export default function ProductScreen(props) {
     navigate(`/cart/${id}?qty=${qty}`, {
       state: {
         id: id,
-        qty: qty || 0,
+        qty: qty,
       },
     });
   };
