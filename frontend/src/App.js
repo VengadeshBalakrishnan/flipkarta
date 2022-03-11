@@ -17,11 +17,10 @@ function App() {
               Flipkarta
             </Link>
           </div>
-          <div>
-            {" "}
+          <div>            
             <Link to="/cart"> Cart
             {cartItems.length > 0 && (
-              <span class="badge">{cartItems.length}</span>
+              <span className="badge">{cartItems.length}</span>
             )}
              </Link>
             <Link to="/signin"> Sign In </Link>

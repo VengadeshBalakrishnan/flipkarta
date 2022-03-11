@@ -24,7 +24,7 @@ export default function ProductScreen(props) {
     navigate(`/cart/${id}?qty=${qty}`, {
       state: {
         id: id,
-        qty: qty,
+        qty: qty || 0,
       },
     });
   };
@@ -40,7 +40,7 @@ export default function ProductScreen(props) {
           <div>
             <Link to="/">Back to Result</Link>
             <div className="row top">
-              <div className="col-1">
+              <div className="col-2">
                 <img
                   className="large"
                   src={selectedProducts.image}
