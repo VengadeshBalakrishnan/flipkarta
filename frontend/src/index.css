@@ -222,6 +222,11 @@ color: #404040;
   margin: 1rem 0;
 }
 
+.formPayment{
+  display: block;
+  flex-direction: column;
+  margin: 1rem;
+}
 /* Dropdown */
 .dropdown {
   display: inline-block;

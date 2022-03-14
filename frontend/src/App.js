@@ -7,8 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import SigninScreen from "./screens/SigninScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import { signout } from "./actions/userActions";
-import CheckoutSteps from "./components/CheckoutSteps";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 
 function App() {
   const cart = useSelector(state => state.cart);
@@ -57,6 +57,7 @@ const dispatch = useDispatch();
             <Route path="/shipping" exact element={<ShippingAddressScreen />} />
             <Route path="/signin" exact element={<SigninScreen />} />
             <Route path="/register" exact element={<RegisterScreen />} />
+            <Route path="/payment" exact element={<PaymentMethodScreen />} />
            
           </Routes>
         </main>
