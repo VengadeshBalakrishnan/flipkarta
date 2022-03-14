@@ -5,6 +5,7 @@ import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
 import { useDispatch, useSelector } from "react-redux";
 import SigninScreen from "./screens/SigninScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 import { signout } from "./actions/userActions";
 
 function App() {
@@ -52,6 +53,7 @@ const dispatch = useDispatch();
             <Route path="/" exact element={<HomeScreen />} />
             <Route path="/product/:id" exact element={<ProductScreen />} />           
             <Route path="/signin" exact element={<SigninScreen />} />
+            <Route path="/register" exact element={<RegisterScreen />} />
           </Routes>
         </main>
         <footer className="row center">All right reserved.</footer>
