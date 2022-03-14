@@ -9,6 +9,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import { signout } from "./actions/userActions";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 function App() {
   const cart = useSelector(state => state.cart);
@@ -58,6 +59,7 @@ const dispatch = useDispatch();
             <Route path="/signin" exact element={<SigninScreen />} />
             <Route path="/register" exact element={<RegisterScreen />} />
             <Route path="/payment" exact element={<PaymentMethodScreen />} />
+            <Route path="/placeorder" exact element={<PlaceOrderScreen />} />
            
           </Routes>
         </main>
