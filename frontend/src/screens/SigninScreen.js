@@ -74,5 +74,3 @@ export default function SigninScreen() {
     </div>
   );
 }
-// localhost:3000/signin?redirect=shipping
-// localhost:3000/register/redirect=shipping

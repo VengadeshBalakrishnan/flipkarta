@@ -44,7 +44,7 @@ userRouter.post(
 
     const createdUser = await user.save();
     res.send({
-      _id: createdUser.id,
+      _id: createdUser._id,
       name: createdUser.name,
       email: createdUser.email,
       isAdmin: createdUser.isAdmin,
