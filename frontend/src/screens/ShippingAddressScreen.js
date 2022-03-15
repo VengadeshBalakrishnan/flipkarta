@@ -12,7 +12,7 @@ export default function ShippingAddressScreen() {
   const {shippingAddress} = cart;
 
   useEffect (() => {
-    if (!userInfo || shippingAddress.address) {
+    if (!userInfo) {
       navigate('/signin');
     }
   }, [navigate, userInfo, shippingAddress]);
