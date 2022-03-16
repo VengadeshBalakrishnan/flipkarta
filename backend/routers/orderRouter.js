@@ -9,6 +9,7 @@ orderRouter.post(
   "/",
   isAuth,
   expressAsyncHandler(async (req, res) => {
+    console.log('testtttt', req.body)
     if (req.body.orderItems.length === 0) {
       res.status(400).send({ message: "Cart is Empty" });
     } else {
@@ -26,6 +27,18 @@ orderRouter.post(
       res
         .status(201)
         .send({ message: "New Order Created", order: createdOrder });
+    }
+  })
+);
+orderRouter.get(
+  "/:id",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+    const order = await Order.findById(req.params.id);
+    if (order) {
+      res.send(order);
+    } else {
+      res.status(404).send({ message: "Order Not Found!!!" });
     }
   })
 );
