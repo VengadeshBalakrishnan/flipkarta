@@ -7,10 +7,9 @@ import MessageBox from "../components/MessageBox";
 export default function CartScreen(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { id } = useParams();
-  const location = useLocation();
-  const qty = location.state.qty || 1;
-
+  const { id  } = useParams();
+  const location = useLocation()
+  const qty = 1
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
   useEffect(() => {
@@ -24,7 +23,7 @@ export default function CartScreen(props) {
     dispatch(removeFromCart(id));
   };
 
-  const checkOutHandler = () => {
+  const checkOutHandler = () => {    
     navigate('/signin?redirect=/shipping')
   }
   return (
