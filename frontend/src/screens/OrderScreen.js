@@ -1,39 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { PayPalButton } from "react-paypal-button-v2";
-import { ORDER_CREATE_RESET } from "../constants/orderConstants";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
-import { detailsOrder } from "../actions/orderActions";
+import { removeFromCart } from "../actions/cartActions";
+import { detailsOrder, payOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-
+import { CART_EMPTY } from "../constants/cartConstants";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
 export default function OrderScreen() {
   const params = useParams();
   const navigate = useNavigate();
   const { id } = params;
+  const orderPay = useSelector((state) => state.orderPay);
+  const { error: errorPay, success: successPay } = orderPay;
   const dispatch = useDispatch();
   const orderDetails = useSelector((state) => state.orderDetails);
   const { loading, error, order } = orderDetails;
+  const userDetails = useSelector((state) => state.userSignin);
+  const {userInfo} = userDetails;
 
   useEffect(() => {
-    // const addPayPalScript = async () => {
+    //const addPayPalScript = async () => {
     //   const { data } = await Axios.get("/api/config/paypal");
     //   const script = document.createElement("script");
     //   script.type = "text/javascript";
     //   script.src = "payPal config id need to add";
-    // };
-
+    //  };
+    dispatch({ type: ORDER_PAY_RESET });
     dispatch(detailsOrder(id));
   }, [dispatch, id]);
-
   
-  const successPaymentHandler = () => {
-    alert("test");
-  };
 
+  const successPaymentHandler = () => {    
+    let paymentData = {
+      id: order._id,
+      email_address: userInfo.email,
+      status: "Completed",
+      update_time: Date().toLocaleString(),
+    };
+    alert("Payment Done");
+    dispatch(payOrder(order, paymentData));
+    navigate(`/orders/${id}`);   
+  };
 
   return loading ? (
     <LoadingBox></LoadingBox>
@@ -76,9 +88,9 @@ export default function OrderScreen() {
                   <strong>Method:</strong>
                   {order.paymentMethod}
                 </p>
-                {order.isDelivered ? (
+                {order.isPaid ? (
                   <MessageBox variant="success">
-                    Delivered at {order.paidAt}
+                    Paid at {order.paidAt}
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Paid</MessageBox>
@@ -147,8 +159,12 @@ export default function OrderScreen() {
               <div>
                 <ul>
                   <li>
-                    <PayPalButton amount={order.totalPrice}
-                    onSuccess={successPaymentHandler}> </PayPalButton>
+                    {/* <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    >
+                      {" "}
+                    </PayPalButton> */}
                     <button
                       className="primary block"
                       onClick={successPaymentHandler}

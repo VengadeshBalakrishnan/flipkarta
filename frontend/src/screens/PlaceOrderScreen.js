@@ -27,16 +27,16 @@ export default function PlaceOrderScreen() {
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
   const dispatch = useDispatch();
 
-  const placeOrderHandle = () => {
-      dispatch(createOrder({...cart, orderItems: cart.cartItems}));
-  }
-
-  useEffect(() => {
+ useEffect(() => {
     if(success){
       navigate(`/orders/${order._id}`);
-      dispatch({type: ORDER_CREATE_RESET})
+      dispatch({type: ORDER_CREATE_RESET});
     }
-  }, [dispatch, order, navigate, success])
+  }, [dispatch, order, navigate, success]);
+
+  const placeOrderHandle = () => {
+    dispatch(createOrder({...cart, orderItems: cart.cartItems}));
+}
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
