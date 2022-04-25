@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ProductScreen from "./screens/ProductScreen";
 import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
@@ -17,6 +11,7 @@ import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PaymentMethodScreen from "./screens/PaymentMethodScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import OrderHistoryScreen from './screens/OrderHistoryScreen'
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -47,14 +42,14 @@ function App() {
                   <span className="badge">{cartItems.length}</span>
                 </Link>
               </>
-            ) : (             
-                <>
-                  <Link to="/">
-                    {" "}
-                    Cart
-                    <span className="badge">{cartItems.length}</span>
-                  </Link>
-                </>
+            ) : (
+              <>
+                <Link to="/">
+                  {" "}
+                  Cart
+                  <span className="badge">{cartItems.length}</span>
+                </Link>
+              </>
             )}
             <div className="dropdown">
               {userInfo ? (
@@ -64,13 +59,42 @@ function App() {
                     {userInfo.name} <i className="fa fa-caret-down"></i>
                   </Link>
                   <ul className="dropdown-content">
-                    <Link to="#signout" onClick={signOutHandler}>
-                      SignOut
-                    </Link>
+                    <li>
+                      <Link to="/orderhistory"> Order History </Link>
+                    </li>
+                    <li>
+                      {" "}
+                      <Link to="/offer"> Offer zone </Link>
+                      <li>
+                        <Link to="/#" onClick={signOutHandler}>
+                          {" "}
+                          SignOut{" "}
+                        </Link>
+                      </li>
+                    </li>
                   </ul>
                 </>
               ) : (
-                <Link to="/signin"> Sign In </Link>
+                <Link to="/signin">
+                  <>
+                    <Link to="#">
+                      {" "}
+                      Login <i className="fa fa-caret-down"></i>
+                    </Link>
+                    <ul className="dropdown-content">
+                      <li>
+                        <Link to="/signin"> Sign In </Link>
+                      </li>
+                      <li>
+                        <Link to="/signin"> Orders </Link>
+                      </li>
+                      <li>
+                        {" "}
+                        <Link to="/signin"> Offer zone </Link>
+                      </li>
+                    </ul>
+                  </>
+                </Link>
               )}
             </div>
           </div>
@@ -86,6 +110,7 @@ function App() {
             <Route path="/placeorder" exact element={<PlaceOrderScreen />} />
             <Route path="/orders/:id" exact element={<OrderScreen />} />
             <Route path="/cart/:id" exact element={<CartScreen />} />
+            <Route path="/orderhistory" exact element={<OrderHistoryScreen />} />
           </Routes>
         </main>
         <footer className="row center">All right reserved.</footer>

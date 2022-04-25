@@ -8,8 +8,10 @@ import { detailsOrder, payOrder } from "../actions/orderActions";
 import CheckoutSteps from "../components/CheckoutSteps";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import PopupBox from "../components/PopupBox";
 import { CART_EMPTY } from "../constants/cartConstants";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
+
 
 export default function OrderScreen() {
   const params = useParams();
@@ -35,17 +37,8 @@ export default function OrderScreen() {
   }, [dispatch, id]);
   
 
-  const successPaymentHandler = () => {    
-    let paymentData = {
-      id: order._id,
-      email_address: userInfo.email,
-      status: "Completed",
-      update_time: Date().toLocaleString(),
-    };
-    alert("Payment Done");
-    dispatch(payOrder(order, paymentData));
-    navigate(`/orders/${id}`);   
-  };
+  const successPaymentHandler = () => {
+  }
 
   return loading ? (
     <LoadingBox></LoadingBox>
@@ -170,7 +163,9 @@ export default function OrderScreen() {
                       onClick={successPaymentHandler}
                     >
                       <strong> Pay Now... </strong>
-                    </button>
+                    </button> 
+
+<PopupBox variant="danger"></PopupBox>
                   </li>
                 </ul>
               </div>

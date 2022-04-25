@@ -98,6 +98,10 @@ button.primary{
 button.block{
   width: 100%
 }
+
+button.small {
+  font-size: 1.2rem;
+}
 /* Header */
 header a {
   color: #ffffff;
@@ -305,4 +309,82 @@ div.item {
   width: 100px;
   height: 100px;
   background-color: grey;
+}
+
+/* Popup Modal */
+.modal {
+  font-size: 15px;
+  width: 100%
+}
+.modal > .header {
+  width: 100%;
+  border-bottom: 1px solid gray;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+/* Button Variaties */
+.infoButton {
+  color: #00529B;
+  background-color: #BDE5F8;
+}
+.successButton {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+}
+.warningButton {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+.errorButton {
+  color: #D8000C;
+  background-color: #FFD2D2;
+}
+.infoButton i, .successButton i, .warningButton i, .errorButton i {
+  margin:10px 22px;
+  font-size:2em;
+  vertical-align:middle;
+  padding: 2rem;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table tbody tr:nth-of-type(odd) {
+  background-color: #f4f4f4;
+}
+.table td,
+.table th {
+  text-align: left;
+  border: 0.1rem solid #e4e4e4;
+  padding: 0.5rem;
+}
+.table button {
+  margin: 0 0.2rem;
 }
