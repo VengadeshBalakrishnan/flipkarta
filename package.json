@@ -1,11 +1,12 @@
 {
   "name": "flipkarta",
   "type": "module",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Modernized Flipkarta ecommerce backend",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
+    "dev": "nodemon --watch backend --exec node backend/server.js",
+    "start": "node backend/server.js"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,12 @@
   },
   "homepage": "https://github.com/VengadeshBalakrishnan/flipkarta#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "dotenv": "^16.0.0",
-    "eslint": "^8.10.0",
-    "express": "^4.17.3",
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.4.2",
+    "express": "^4.21.2",
     "express-async-handler": "^1.2.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.5"
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "^8.9.0",
+    "nodemon": "^3.1.0"
   }
 }

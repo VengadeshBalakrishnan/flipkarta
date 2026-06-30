@@ -4,10 +4,11 @@ import expressAsyncHandler from "express-async-handler";
 import data from "../data.js";
 
 const productRouter = express.Router();
+
 productRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find({}).sort({ createdAt: -1 });
     res.send(products);
   })
 );
@@ -15,7 +16,7 @@ productRouter.get(
 productRouter.get(
   "/seed",
   expressAsyncHandler(async (req, res) => {
-  //  await Product.remove({});
+    await Product.deleteMany({});
     const createdProducts = await Product.insertMany(data.product);
     res.send({ createdProducts });
   })
@@ -28,7 +29,7 @@ productRouter.get(
     if (product) {
       res.send(product);
     } else {
-      res.status(400).send({ message: "Product Not Found!!!" });
+      res.status(404).send({ message: "Product Not Found!!!" });
     }
   })
 );
